@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SampleTableViewCell : UITableViewCell {
 
+    @IBOutlet weak private var ivAvatar: UIImageView!
     @IBOutlet weak private var label1: UILabel!
     @IBOutlet weak private var label2: UILabel!
     @IBOutlet weak private var label3: UILabel!
@@ -29,5 +31,10 @@ class SampleTableViewCell : UITableViewCell {
         label1.text = "\(data.id)"
         label2.text = data.login
         label3.text = data.url
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        
+        ivAvatar.kf.setImage(with: URL(string: data.avatarURL),
+                             options: [.processor(processor)])
     }
 }

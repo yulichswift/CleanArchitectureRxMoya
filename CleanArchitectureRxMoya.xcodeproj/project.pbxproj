@@ -12,6 +12,7 @@
 		1F43D44423E99A10004CE885 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44323E99A10004CE885 /* MainViewModel.swift */; };
 		1F43D44723E99C25004CE885 /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44623E99C25004CE885 /* SampleTableViewCell.swift */; };
 		1F8CEA9223EA778C00D5C566 /* Observable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CEA9123EA778C00D5C566 /* Observable+Ext.swift */; };
+		1F9D6A3023EAD00F00A89029 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1F9D6A2F23EAD00F00A89029 /* Kingfisher */; };
 		1FC5A71423E91530005C44A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71323E91530005C44A6 /* AppDelegate.swift */; };
 		1FC5A71623E91530005C44A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71523E91530005C44A6 /* SceneDelegate.swift */; };
 		1FC5A71823E91530005C44A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71723E91530005C44A6 /* MainViewController.swift */; };
@@ -55,6 +56,7 @@
 				1FC5A72E23E91995005C44A6 /* RxMoya in Frameworks */,
 				1FC5A73323E919CA005C44A6 /* RxSwift in Frameworks */,
 				1FC5A72C23E91995005C44A6 /* Moya in Frameworks */,
+				1F9D6A3023EAD00F00A89029 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +202,7 @@
 				1FC5A72D23E91995005C44A6 /* RxMoya */,
 				1FC5A73023E919CA005C44A6 /* RxCocoa */,
 				1FC5A73223E919CA005C44A6 /* RxSwift */,
+				1F9D6A2F23EAD00F00A89029 /* Kingfisher */,
 			);
 			productName = CleanArchitectureRxMoya;
 			productReference = 1FC5A71023E91530005C44A6 /* CleanArchitectureRxMoya.app */;
@@ -232,6 +235,7 @@
 			packageReferences = (
 				1FC5A72A23E91995005C44A6 /* XCRemoteSwiftPackageReference "Moya" */,
 				1FC5A72F23E919CA005C44A6 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				1F9D6A2E23EAD00F00A89029 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 1FC5A71123E91530005C44A6 /* Products */;
 			projectDirPath = "";
@@ -470,6 +474,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F9D6A2E23EAD00F00A89029 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.13.0;
+			};
+		};
 		1FC5A72A23E91995005C44A6 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -489,6 +501,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F9D6A2F23EAD00F00A89029 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F9D6A2E23EAD00F00A89029 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		1FC5A72B23E91995005C44A6 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FC5A72A23E91995005C44A6 /* XCRemoteSwiftPackageReference "Moya" */;
