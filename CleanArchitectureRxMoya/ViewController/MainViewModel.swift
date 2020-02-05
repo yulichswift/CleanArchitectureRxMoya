@@ -19,12 +19,16 @@ final class MainViewModel: BaseViewModel {
     let provider = MoyaProvider<GitHubApiManager>()
     
     func fetchUsersSince(_ since: Int) {
+        progressingPublish.onNext(true)
+        
         provider.rx.request(.allUsers(since: since))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             //.mapString()
             .map(GitHubUsers.self)
             .subscribe { rusult in
+                self.progressingPublish.onNext(false)
+                
                 switch rusult {
                 case let .success(response):
                     //print(response) // Print string

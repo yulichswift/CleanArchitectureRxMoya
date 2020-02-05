@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MBProgressHUD
 
 class MainViewController: BaseViewController {
     
@@ -39,6 +40,19 @@ class MainViewController: BaseViewController {
     }
     
     private func setupViewModel() {
+        
+        viewModel.progressingPublish
+            .throttle(2.5, scheduler: SerialDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe({ event in
+                if (true == event.element) {
+                    MBProgressHUD.showAdded(to: self.view, animated: true)
+                } else {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.usersPublish
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, sample, cell) in
@@ -51,7 +65,7 @@ class MainViewController: BaseViewController {
         let viewWillAppear = rx.sentMessage(#selector(MainViewController.viewWillAppear(_:))).mapToVoid().asDriverOnErrorJustComplete()
         let rightBtnTap = rightBtn.rx.tap.asDriver()
         Driver.merge(viewWillAppear, rightBtnTap)
-            .throttle(8, latest: false) // latest: 最後一筆是否送出
+            .throttle(5, latest: false) // latest: 最後一筆是否送出
             .drive(onNext: {
                 print("Load data")
                 self.viewModel.fetchUsersSince(10)
