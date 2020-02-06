@@ -48,23 +48,44 @@ class MainViewController: BaseViewController {
                 if (true == event.element) {
                     MBProgressHUD.showAdded(to: self.view, animated: true)
                 } else {
+                    self.tableView.refreshControl?.endRefreshing()
                     MBProgressHUD.hide(for: self.view, animated: true)
                 }
             })
             .disposed(by: disposeBag)
         
+        // TableView方法1 (drive)
         viewModel.usersPublish
             .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, sample, cell) in
-                cell.bind(data: sample)
+            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, model, cell) in
+                cell.setModel(model)
         }
         .disposed(by: disposeBag)
+        
+        // TableView方法2 (bind)
+        /*
+        // https://github.com/RxSwiftCommunity/RxDataSources
+        viewModel.usersPublish
+            .bind(to: tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { index, model, cell in
+                cell.setModel(model)
+        }
+        .disposed(by: disposeBag)
+ `      */
     }
     
     private func setupObserver() {
-        let viewWillAppear = rx.sentMessage(#selector(MainViewController.viewWillAppear(_:))).mapToVoid().asDriverOnErrorJustComplete()
+        let viewWillAppear = rx
+            .sentMessage(#selector(MainViewController.viewWillAppear(_:)))
+            .mapToVoid()
+            .asDriverOnErrorJustComplete()
+        
+        let pull = tableView.refreshControl!.rx
+            .controlEvent(.valueChanged)
+            .asDriver()
+        
         let rightBtnTap = rightBtn.rx.tap.asDriver()
-        Driver.merge(viewWillAppear, rightBtnTap)
+        
+        Driver.merge(viewWillAppear, pull, rightBtnTap)
             .throttle(5, latest: false) // latest: 最後一筆是否送出
             .drive(onNext: {
                 print("Load data")
@@ -79,6 +100,8 @@ class MainViewController: BaseViewController {
     private func setupTableView() {
         tableView.delegate = self
         //tableView.dataSource = self
+        
+        tableView.refreshControl = UIRefreshControl()
     }
 }
 

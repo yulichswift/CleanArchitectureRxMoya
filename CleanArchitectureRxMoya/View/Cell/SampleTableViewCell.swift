@@ -27,14 +27,14 @@ class SampleTableViewCell : UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func bind(data: GitHubUserElement) {
-        label1.text = "\(data.id)"
-        label2.text = data.login
-        label3.text = data.url
+    func setModel(_ model: GitHubUserElement) {
+        label1.text = "\(model.id)"
+        label2.text = model.login
+        label3.text = model.url
         
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
         
-        ivAvatar.kf.setImage(with: URL(string: data.avatarURL),
+        ivAvatar.kf.setImage(with: URL(string: model.avatarURL),
                              options: [.processor(processor)])
     }
 }
