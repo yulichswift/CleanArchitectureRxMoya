@@ -67,6 +67,9 @@
                                                         <constraint firstAttribute="width" constant="50" id="8iW-ry-Arf"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="actionBtn:" destination="NNT-RT-AqY" eventType="touchUpInside" id="clp-kB-bg9"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s3i-bA-xSY">
                                                     <rect key="frame" x="16" y="16.5" width="80" height="80"/>

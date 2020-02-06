@@ -14,6 +14,7 @@ import MBProgressHUD
 class MainViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
     let rightBtn = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: nil)
     
     let viewModel = MainViewModel()
@@ -59,6 +60,7 @@ class MainViewController: BaseViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, model, cell) in
                 cell.setModel(model)
+                cell.delegate = self
         }
         .disposed(by: disposeBag)
         
@@ -109,6 +111,17 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? SampleTableViewCell {
+            if let data = cell.data {
+                print("Id: \(data.id)")
+            }
+        }
+    }
 }
 
 /*
@@ -123,3 +136,9 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 */
+
+extension MainViewController: SampleTableViewCellAction {
+    func onClickedBtn(id: Int) {
+        print("Id: \(id)")
+    }
+}

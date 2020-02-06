@@ -9,12 +9,26 @@
 import UIKit
 import Kingfisher
 
+protocol SampleTableViewCellAction: class {
+    func onClickedBtn(id: Int)
+}
+
 class SampleTableViewCell : UITableViewCell {
+    
+    weak var delegate: SampleTableViewCellAction?
+    
+    var data: GitHubUserElement?
 
     @IBOutlet weak private var ivAvatar: UIImageView!
     @IBOutlet weak private var label1: UILabel!
     @IBOutlet weak private var label2: UILabel!
     @IBOutlet weak private var label3: UILabel!
+    
+    @IBAction func actionBtn(_ sender: UIButton) {
+        if let delegate = delegate, let data = data {
+            delegate.onClickedBtn(id: data.id)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,5 +50,7 @@ class SampleTableViewCell : UITableViewCell {
         
         ivAvatar.kf.setImage(with: URL(string: model.avatarURL),
                              options: [.processor(processor)])
+        
+        self.data = model
     }
 }
