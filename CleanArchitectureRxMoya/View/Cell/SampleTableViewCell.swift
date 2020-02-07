@@ -3,7 +3,7 @@
 //  CleanArchitectureRxMoya
 //
 //  Created by Jeff Yu on 2020/2/3.
-//  Copyright © 2020 Tcit. All rights reserved.
+//  Copyright © 2020 Jeff. All rights reserved.
 //
 
 import UIKit

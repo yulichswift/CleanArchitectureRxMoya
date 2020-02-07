@@ -1,9 +1,9 @@
 //
-//  SampleElement.swift
+//  GitHubModel.swift
 //  CleanArchitectureRxMoya
 //
 //  Created by Jeff Yu on 2020/2/3.
-//  Copyright © 2020 Tcit. All rights reserved.
+//  Copyright © 2020 Jeff. All rights reserved.
 //
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:

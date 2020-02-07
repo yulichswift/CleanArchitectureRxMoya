@@ -1,9 +1,9 @@
 //
-//  ApiManagerSample.swift
+//  GitHubApiManager.swift
 //  CleanArchitectureRxMoya
 //
 //  Created by Jeff Yu on 2020/1/31.
-//  Copyright © 2020 Tcit. All rights reserved.
+//  Copyright © 2020 Jeff. All rights reserved.
 //
 
 import Foundation
