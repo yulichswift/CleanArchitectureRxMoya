@@ -27,18 +27,6 @@ class PublishViewController: BaseViewController {
         setupObserver()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("viewWillAppear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        print("viewWillDisappear")
-    }
-    
     private func setupViewModel() {
         viewModel = PublishViewModel()
         
@@ -58,9 +46,8 @@ class PublishViewController: BaseViewController {
         // TableView方法1 (drive)
         viewModel.usersPublish
             .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, model, cell) in
-                cell.setModel(model)
-                cell.delegate = self
+            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, data, cell) in
+                cell.setData(data)
         }
         .disposed(by: disposeBag)
         
@@ -104,17 +91,5 @@ class PublishViewController: BaseViewController {
         //tableView.dataSource = self
         
         tableView.refreshControl = UIRefreshControl()
-    }
-    
-    private func presentDetailView() {
-        if let nextVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-    }
-}
-
-extension PublishViewController: SampleTableViewCellAction {
-    func onClickedBtn(id: Int) {
-        print("Id: \(id)")
     }
 }

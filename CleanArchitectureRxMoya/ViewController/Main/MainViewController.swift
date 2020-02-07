@@ -70,8 +70,8 @@ class MainViewController: BaseViewController {
         
         output.resultUsers
             .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, model, cell) in
-                cell.setModel(model)
+            .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, data, cell) in
+                cell.setData(data)
                 cell.delegate = self
         }
         .disposed(by: disposeBag)
@@ -88,16 +88,21 @@ class MainViewController: BaseViewController {
         tableView.refreshControl = UIRefreshControl()
     }
     
-    private func presentDetailView(_ model: GitHubUserElement) {
+    private func presentDetailView(isPresent: Bool, _ data: GitHubUserElement) {
         if let nextVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             
             let nextVM = DetailViewModel()
-            nextVM.titleBehavior.onNext("\(model.id) \(model.login)")
-            nextVM.urlBehavior.onNext(model.url)
-            nextVM.avatarUrlBehavior.onNext(model.avatarURL)
+            nextVM.titleBehavior.onNext("\(data.id) \(data.login)")
+            nextVM.urlBehavior.onNext(data.url)
+            nextVM.avatarUrlBehavior.onNext(data.avatarURL)
             nextVC.bind(nextVM)
             
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            if isPresent {
+                // iOS13不會觸發"disappear"
+                self.present(nextVC, animated: true, completion: nil)
+            } else {
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         }
     }
 }
@@ -113,7 +118,7 @@ extension MainViewController: UITableViewDelegate {
         
         if let cell = tableView.cellForRow(at: indexPath) as? SampleTableViewCell {
             if let data = cell.data {
-                presentDetailView(data)
+                presentDetailView(isPresent: true, data)
             }
         }
     }
@@ -133,7 +138,7 @@ extension MainViewController: UITableViewDataSource {
 */
 
 extension MainViewController: SampleTableViewCellAction {
-    func onClickedBtn(id: Int) {
-        print("Id: \(id)")
+    func onClickedBtn(data: GitHubUserElement) {
+        presentDetailView(isPresent: false, data)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol SampleTableViewCellAction: class {
-    func onClickedBtn(id: Int)
+    func onClickedBtn(data: GitHubUserElement)
 }
 
 class SampleTableViewCell : UITableViewCell {
@@ -26,7 +26,7 @@ class SampleTableViewCell : UITableViewCell {
     
     @IBAction func actionBtn(_ sender: UIButton) {
         if let delegate = delegate, let data = data {
-            delegate.onClickedBtn(id: data.id)
+            delegate.onClickedBtn(data: data)
         }
     }
     
@@ -41,7 +41,7 @@ class SampleTableViewCell : UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setModel(_ model: GitHubUserElement) {
+    func setData(_ model: GitHubUserElement) {
         label1.text = "\(model.id)"
         label2.text = model.login
         label3.text = model.url
