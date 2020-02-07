@@ -21,5 +21,10 @@ import RxCocoa
 
 open class BaseViewModel {
     
+    deinit {
+        // 測試物件釋放
+        print("Deinit: \(self)")
+    }
+    
     let progressingPublish: PublishSubject<Bool> = PublishSubject.init()
 }

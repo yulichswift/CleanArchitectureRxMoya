@@ -30,13 +30,13 @@ class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("viewWillAppear")
+        print("ViewWillAppear: \(self)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        print("viewWillDisappear")
+        print("ViewWillDisappear: \(self)")
     }
     
     private func setupViewModel() {

@@ -40,7 +40,7 @@ class DetailViewController: BaseViewController {
         viewModel.avatarUrlBehavior
             .subscribe(onNext: { url in
                 let processor = RoundCornerImageProcessor(cornerRadius: 20)
-                
+
                 self.ivAvatar.kf.setImage(with: URL(string: url),
                                           options: [.processor(processor)])
             })
@@ -48,7 +48,7 @@ class DetailViewController: BaseViewController {
         
         let input = DetailViewModel.Input(enterText: tvInput.rx.text.orEmpty.asDriver())
         let output = viewModel.transform(input: input)
-        
+
         output.enterVaild
             .asObservable()
             .subscribe(onNext: { isValid in
