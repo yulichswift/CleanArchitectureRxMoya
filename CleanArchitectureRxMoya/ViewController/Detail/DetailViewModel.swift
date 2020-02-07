@@ -14,6 +14,7 @@ import RxCocoa
 final class DetailViewModel: BaseViewModel {
     
     let titleBehavior: BehaviorSubject<String> = BehaviorSubject.init(value: "")
+    let urlBehavior: BehaviorSubject<String> = BehaviorSubject.init(value: "")
     let avatarUrlBehavior: BehaviorSubject<String> = BehaviorSubject.init(value: "")
 }
 

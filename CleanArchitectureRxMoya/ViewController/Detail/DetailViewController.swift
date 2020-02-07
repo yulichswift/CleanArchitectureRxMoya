@@ -14,6 +14,7 @@ import Kingfisher
 class DetailViewController: BaseViewController {
     
     @IBOutlet weak var ivAvatar: UIImageView!
+    @IBOutlet weak var labelUrl: UILabel!
     @IBOutlet weak var tvInput: UITextField!
     
     private var viewModel: DetailViewModel!
@@ -23,13 +24,18 @@ class DetailViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
-
+        
         viewModel.titleBehavior
             .subscribe(onNext:{ title in
                 self.navigationItem.title = title
             })
             .disposed(by: disposeBag)
         
+        viewModel.urlBehavior
+            .subscribe(onNext:{ title in
+                self.labelUrl.text = title
+            })
+            .disposed(by: disposeBag)
         
         viewModel.avatarUrlBehavior
             .subscribe(onNext: { url in

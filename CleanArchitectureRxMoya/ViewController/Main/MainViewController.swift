@@ -93,6 +93,7 @@ class MainViewController: BaseViewController {
             
             let nextVM = DetailViewModel()
             nextVM.titleBehavior.onNext("\(model.id) \(model.login)")
+            nextVM.urlBehavior.onNext(model.url)
             nextVM.avatarUrlBehavior.onNext(model.avatarURL)
             nextVC.bind(nextVM)
             

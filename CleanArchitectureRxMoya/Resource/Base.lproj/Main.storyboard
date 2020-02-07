@@ -145,8 +145,14 @@
                                     <constraint firstAttribute="width" secondItem="4em-D7-L4S" secondAttribute="height" multiplier="1:1" id="qpK-Lz-Awc"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyM-9C-hYt">
+                                <rect key="frame" x="20" y="276" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iE8-bK-lno">
-                                <rect key="frame" x="107" y="276" width="200" height="34"/>
+                                <rect key="frame" x="107" y="313" width="200" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -156,7 +162,10 @@
                             <constraint firstItem="4em-D7-L4S" firstAttribute="top" secondItem="pGi-ex-PRx" secondAttribute="top" constant="16" id="3A0-1A-Tiz"/>
                             <constraint firstItem="iE8-bK-lno" firstAttribute="leading" secondItem="4em-D7-L4S" secondAttribute="leading" id="BDg-qU-SmE"/>
                             <constraint firstItem="iE8-bK-lno" firstAttribute="trailing" secondItem="4em-D7-L4S" secondAttribute="trailing" id="FSN-Y5-wL7"/>
-                            <constraint firstItem="iE8-bK-lno" firstAttribute="top" secondItem="4em-D7-L4S" secondAttribute="bottom" constant="16" id="ZXT-RV-EMJ"/>
+                            <constraint firstItem="RyM-9C-hYt" firstAttribute="leading" secondItem="pGi-ex-PRx" secondAttribute="leading" constant="20" id="HBd-ey-Sv9"/>
+                            <constraint firstItem="iE8-bK-lno" firstAttribute="top" secondItem="RyM-9C-hYt" secondAttribute="bottom" constant="16" id="ODh-of-XTI"/>
+                            <constraint firstItem="RyM-9C-hYt" firstAttribute="top" secondItem="4em-D7-L4S" secondAttribute="bottom" constant="16" id="YUW-DW-bPl"/>
+                            <constraint firstItem="pGi-ex-PRx" firstAttribute="trailing" secondItem="RyM-9C-hYt" secondAttribute="trailing" constant="20" id="q9N-FF-hwR"/>
                             <constraint firstItem="4em-D7-L4S" firstAttribute="centerX" secondItem="pGi-ex-PRx" secondAttribute="centerX" id="rcS-p4-VSt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pGi-ex-PRx"/>
@@ -164,6 +173,7 @@
                     <navigationItem key="navigationItem" id="Jqa-gf-Zob"/>
                     <connections>
                         <outlet property="ivAvatar" destination="4em-D7-L4S" id="jN6-Rk-ZEe"/>
+                        <outlet property="labelUrl" destination="RyM-9C-hYt" id="DDR-fv-fow"/>
                         <outlet property="tvInput" destination="iE8-bK-lno" id="zyI-Iy-t4X"/>
                     </connections>
                 </viewController>
