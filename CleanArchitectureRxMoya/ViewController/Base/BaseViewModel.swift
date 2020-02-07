@@ -22,19 +22,4 @@ import RxCocoa
 open class BaseViewModel {
     
     let progressingPublish: PublishSubject<Bool> = PublishSubject.init()
-    
-    private var _disposeBag: DisposeBag?
-    
-    func getDisposeBag() -> DisposeBag {
-        if (_disposeBag == nil) {
-            _disposeBag = DisposeBag()
-        }
-        
-        return _disposeBag!
-    }
-    
-    deinit {
-        _disposeBag = nil
-    }
-    
 }

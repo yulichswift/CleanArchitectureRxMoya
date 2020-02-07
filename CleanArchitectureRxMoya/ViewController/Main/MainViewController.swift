@@ -15,17 +15,16 @@ class MainViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let rightBtn = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: nil)
+    private let rightBtn = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: nil)
     
-    let viewModel = MainViewModel()
+    private var viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
-        setupNavigationbar()
+        setupNavigationBar()
         setupTableView()
         setupViewModel()
-        setupObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,9 +40,8 @@ class MainViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        
         viewModel.progressingPublish
-            .throttle(2.5, scheduler: SerialDispatchQueueScheduler(qos: .background))
+            .throttle(1, scheduler: SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .subscribe({ event in
                 if (true == event.element) {
@@ -55,47 +53,31 @@ class MainViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        // TableView方法1 (drive)
-        viewModel.usersPublish
+        // MARK: Obserable transtrome
+        let viewWillAppear = rx
+            .sentMessage(#selector(MainViewController.viewWillAppear(_:)))
+            .mapToVoid()
+        
+        let pull = tableView.refreshControl!.rx
+            .controlEvent(.valueChanged).mapToVoid()
+        
+        let tap = rightBtn.rx.tap.mapToVoid()
+        
+        // latest: 最後一筆是否送出
+        let mergeObservable = Observable.merge(viewWillAppear, pull, tap)
+        
+        let output = viewModel.transform(input: MainViewModel.Input(fetchUsers: mergeObservable))
+        
+        output.resultUsers
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, model, cell) in
                 cell.setModel(model)
                 cell.delegate = self
         }
         .disposed(by: disposeBag)
-        
-        // TableView方法2 (bind)
-        /*
-        // https://github.com/RxSwiftCommunity/RxDataSources
-        viewModel.usersPublish
-            .bind(to: tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { index, model, cell in
-                cell.setModel(model)
-        }
-        .disposed(by: disposeBag)
- `      */
     }
     
-    private func setupObserver() {
-        let viewWillAppear = rx
-            .sentMessage(#selector(MainViewController.viewWillAppear(_:)))
-            .mapToVoid()
-            .asDriverOnErrorJustComplete()
-        
-        let pull = tableView.refreshControl!.rx
-            .controlEvent(.valueChanged)
-            .asDriver()
-        
-        let rightBtnTap = rightBtn.rx.tap.asDriver()
-        
-        Driver.merge(viewWillAppear, pull, rightBtnTap)
-            .throttle(5, latest: false) // latest: 最後一筆是否送出
-            .drive(onNext: {
-                print("Load data")
-                self.viewModel.fetchUsersSince(10)
-            }).disposed(by: disposeBag)
-    }
-    
-    private func setupNavigationbar() {
+    private func setupNavigationBar() {
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightBtn
     }
     
@@ -104,6 +86,18 @@ class MainViewController: BaseViewController {
         //tableView.dataSource = self
         
         tableView.refreshControl = UIRefreshControl()
+    }
+    
+    private func presentDetailView(_ model: GitHubUserElement) {
+        if let nextVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            
+            let nextVM = DetailViewModel()
+            nextVM.titleBehavior.onNext("\(model.id) \(model.login)")
+            nextVM.avatarUrlBehavior.onNext(model.avatarURL)
+            nextVC.bind(nextVM)
+            
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 
@@ -118,7 +112,7 @@ extension MainViewController: UITableViewDelegate {
         
         if let cell = tableView.cellForRow(at: indexPath) as? SampleTableViewCell {
             if let data = cell.data {
-                print("Id: \(data.id)")
+                presentDetailView(data)
             }
         }
     }

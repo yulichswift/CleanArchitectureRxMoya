@@ -130,5 +130,46 @@
             </objects>
             <point key="canvasLocation" x="-128" y="140"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="MNG-5A-eoI">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="qFD-53-VoS" customClass="DetailViewController" customModule="CleanArchitectureRxMoya" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ecU-8o-xWf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4em-D7-L4S">
+                                <rect key="frame" x="107" y="60" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Rx3-6L-duC"/>
+                                    <constraint firstAttribute="width" secondItem="4em-D7-L4S" secondAttribute="height" multiplier="1:1" id="qpK-Lz-Awc"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iE8-bK-lno">
+                                <rect key="frame" x="107" y="276" width="200" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4em-D7-L4S" firstAttribute="top" secondItem="pGi-ex-PRx" secondAttribute="top" constant="16" id="3A0-1A-Tiz"/>
+                            <constraint firstItem="iE8-bK-lno" firstAttribute="leading" secondItem="4em-D7-L4S" secondAttribute="leading" id="BDg-qU-SmE"/>
+                            <constraint firstItem="iE8-bK-lno" firstAttribute="trailing" secondItem="4em-D7-L4S" secondAttribute="trailing" id="FSN-Y5-wL7"/>
+                            <constraint firstItem="iE8-bK-lno" firstAttribute="top" secondItem="4em-D7-L4S" secondAttribute="bottom" constant="16" id="ZXT-RV-EMJ"/>
+                            <constraint firstItem="4em-D7-L4S" firstAttribute="centerX" secondItem="pGi-ex-PRx" secondAttribute="centerX" id="rcS-p4-VSt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pGi-ex-PRx"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jqa-gf-Zob"/>
+                    <connections>
+                        <outlet property="ivAvatar" destination="4em-D7-L4S" id="jN6-Rk-ZEe"/>
+                        <outlet property="tvInput" destination="iE8-bK-lno" id="zyI-Iy-t4X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ja-VS-r7g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="719" y="140"/>
+        </scene>
     </scenes>
 </document>

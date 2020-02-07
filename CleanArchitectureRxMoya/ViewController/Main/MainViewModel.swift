@@ -12,30 +12,44 @@ import RxSwift
 import RxCocoa
 
 final class MainViewModel: BaseViewModel {
-    
-    let usersPublish: PublishSubject<GitHubUsers> = PublishSubject.init()
-    
+        
     //let provider = MoyaProvider<GitHubApiManager>(plugins: [NetworkLoggerPlugin(verbose: true)])
     let provider = MoyaProvider<GitHubApiManager>()
+}
+
+extension MainViewModel: ObserableTransform {
     
-    func fetchUsersSince(_ since: Int) {
-        progressingPublish.onNext(true)
+    struct Input {
+        let fetchUsers: Observable<Void>
+    }
+    
+    struct Output {
+        let resultUsers: Observable<GitHubUsers>
+    }
+    
+    func transform(input: Input) -> Output {
         
-        provider.rx.request(.allUsers(since: since))
-            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .observeOn(MainScheduler.instance)
-            //.mapString()
-            .map(GitHubUsers.self)
-            .subscribe { rusult in
-                self.progressingPublish.onNext(false)
-                
-                switch rusult {
-                case let .success(response):
-                    //print(response) // Print string
-                    self.usersPublish.onNext(response)
-                case let .error(error):
-                    print(error)
-                    self.usersPublish.onNext([])
-                }}.disposed(by: self.getDisposeBag())
+        let resultUsers = input.fetchUsers
+            .throttle(10, latest: false, scheduler: SerialDispatchQueueScheduler(qos: .background))
+            .flatMap {
+                return self.provider.rx.request(.allUsers(since: 5))
+                    .map(GitHubUsers.self)
+                    .do(onSuccess: { _ in
+                        print("Load onSuccess")
+                        self.progressingPublish.onNext(false)
+                    }, onError: { _ in
+                        print("Load onError")
+                        self.progressingPublish.onNext(false)
+                    }, onSubscribe: {
+                        print("Loading")
+                        self.progressingPublish.onNext(true)
+                    })
+                    .catchError { error in
+                        print("Error:", error)
+                        return Single.just([])
+                }
+        }
+        
+        return Output(resultUsers: resultUsers)
     }
 }
