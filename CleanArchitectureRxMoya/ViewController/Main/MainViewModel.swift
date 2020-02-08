@@ -15,6 +15,8 @@ final class MainViewModel: BaseViewModel {
         
     //let provider = MoyaProvider<GitHubApiManager>(plugins: [NetworkLoggerPlugin(verbose: true)])
     let provider = MoyaProvider<GitHubApiManager>()
+    
+    var sinceId = 8
 }
 
 extension MainViewModel: ObserableTransform {
@@ -32,7 +34,7 @@ extension MainViewModel: ObserableTransform {
         let resultUsers = input.fetchUsers
             .throttle(10, latest: false, scheduler: SerialDispatchQueueScheduler(qos: .background))
             .flatMap {
-                return self.provider.rx.request(.allUsers(since: 5))
+                return self.provider.rx.request(.allUsers(since: self.sinceId))
                     .map(GitHubUsers.self)
                     .do(onSuccess: { _ in
                         logger.verbose("Load onSuccess")
@@ -49,7 +51,7 @@ extension MainViewModel: ObserableTransform {
                         return Single.just([])
                 }
         }
-        .asDriver(onErrorJustReturn: [])
+        .asDriver(onErrorJustReturn: []) // driver觀察時, 會轉換成main thread.
         
         return Output(resultUsers: resultUsers)
     }

@@ -29,8 +29,9 @@ class MainViewController: BaseViewController {
     
     private func setupViewModel() {
         viewModel.progressingPublish
-            .throttle(1, scheduler: SerialDispatchQueueScheduler(qos: .background))
-            .observeOn(MainScheduler.instance)
+            .throttle(1, scheduler: MainScheduler.instance) // scheduler決定觀察時在什麼thread執行
+            //.throttle(1, scheduler: SerialDispatchQueueScheduler(qos: .background))
+            //.observeOn(MainScheduler.instance)
             .subscribe({ event in
                 if (true == event.element) {
                     MBProgressHUD.showAdded(to: self.view, animated: true)

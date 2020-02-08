@@ -32,7 +32,7 @@ class PublishViewController: BaseViewController {
         viewModel = PublishViewModel()
         
         viewModel.progressingPublish
-            .throttle(2.5, scheduler: SerialDispatchQueueScheduler(qos: .background))
+            .throttle(2.5, scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
             .subscribe({ event in
                 if (true == event.element) {

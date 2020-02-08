@@ -22,8 +22,8 @@ final class PublishViewModel: BaseViewModel {
     func fetchUsersSince(_ since: Int) {
         progressingPublish.onNext(true)
         
-        provider.rx.request(.allUsers(since: since))
-            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
+        provider.rx.request(.allUsers(since: since)) // moya預設在背景訂閱, 前景觀察
+            //.subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             //.observeOn(MainScheduler.instance)
             //.mapString()
             .map(GitHubUsers.self)
@@ -32,7 +32,7 @@ final class PublishViewModel: BaseViewModel {
                 
                 switch rusult {
                 case let .success(response):
-                    //log.verbose(response) // mapString
+                    //logger.verbose(response) // mapString
                     self.usersPublish.onNext(response)
                 case let .error(error):
                     logger.error(error)
