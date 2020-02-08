@@ -99,6 +99,15 @@
           "revision": "cce95dd704bc08cd3d69c087a05a6fc3118e2722",
           "version": "4.5.0"
         }
+      },
+      {
+        "package": "XCGLogger",
+        "repositoryURL": "https://github.com/DaveWoodCom/XCGLogger",
+        "state": {
+          "branch": null,
+          "revision": "a9c4667b247928a29bdd41be2ec2c8d304215a54",
+          "version": "7.0.1"
+        }
       }
     ]
   },

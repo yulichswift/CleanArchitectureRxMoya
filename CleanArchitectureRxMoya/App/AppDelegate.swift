@@ -8,6 +8,14 @@
 
 import UIKit
 import CoreData
+import XCGLogger
+
+// MARK: XCGLogger
+#if DEBUG
+let logger = LogUtil.advancedLogger()
+#else
+let logger = LogUtil.releaseLogger()
+#endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
