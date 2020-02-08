@@ -23,7 +23,7 @@ open class BaseViewModel {
     
     deinit {
         // 測試物件釋放
-        print("Deinit: \(self)")
+        logger.verbose(self.theClassName)
     }
     
     let progressingPublish: PublishSubject<Bool> = PublishSubject.init()

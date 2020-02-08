@@ -27,18 +27,6 @@ class MainViewController: BaseViewController {
         setupViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("ViewWillAppear: \(self)")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        print("ViewWillDisappear: \(self)")
-    }
-    
     private func setupViewModel() {
         viewModel.progressingPublish
             .throttle(1, scheduler: SerialDispatchQueueScheduler(qos: .background))
@@ -69,7 +57,6 @@ class MainViewController: BaseViewController {
         let output = viewModel.transform(input: MainViewModel.Input(fetchUsers: mergeObservable))
         
         output.resultUsers
-            .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, data, cell) in
                 cell.setData(data)
                 cell.delegate = self

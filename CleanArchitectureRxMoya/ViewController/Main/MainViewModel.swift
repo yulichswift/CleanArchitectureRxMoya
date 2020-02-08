@@ -24,7 +24,7 @@ extension MainViewModel: ObserableTransform {
     }
     
     struct Output {
-        let resultUsers: Observable<GitHubUsers>
+        let resultUsers: Driver<GitHubUsers>
     }
     
     func transform(input: Input) -> Output {
@@ -35,20 +35,21 @@ extension MainViewModel: ObserableTransform {
                 return self.provider.rx.request(.allUsers(since: 5))
                     .map(GitHubUsers.self)
                     .do(onSuccess: { _ in
-                        print("Load onSuccess")
+                        logger.verbose("Load onSuccess")
                         self.progressingPublish.onNext(false)
                     }, onError: { _ in
-                        print("Load onError")
+                        logger.verbose("Load onError")
                         self.progressingPublish.onNext(false)
                     }, onSubscribe: {
-                        print("Loading")
+                        logger.verbose("Loading")
                         self.progressingPublish.onNext(true)
                     })
                     .catchError { error in
-                        print("Error:", error)
+                        logger.error(error)
                         return Single.just([])
                 }
         }
+        .asDriver(onErrorJustReturn: [])
         
         return Output(resultUsers: resultUsers)
     }

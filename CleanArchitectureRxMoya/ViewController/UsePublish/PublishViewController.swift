@@ -12,6 +12,7 @@ import RxCocoa
 import MBProgressHUD
 
 class PublishViewController: BaseViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     
     private let rightBtn = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: nil)
@@ -77,7 +78,7 @@ class PublishViewController: BaseViewController {
         Driver.merge(viewWillAppear, pull, rightBtnTap)
             .throttle(1, latest: false) // latest: 最後一筆是否送出
             .drive(onNext: {
-                print("Load data")
+                logger.verbose("Load data")
                 self.viewModel.fetchUsersSince(10)
             }).disposed(by: disposeBag)
     }

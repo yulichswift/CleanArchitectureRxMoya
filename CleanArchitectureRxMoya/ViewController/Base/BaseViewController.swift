@@ -14,7 +14,7 @@ open class BaseViewController: UIViewController {
     
     deinit {
         // 測試物件釋放
-        print("Deinit: \(self)")
+        logger.verbose(self.theClassName)
     }
 
     fileprivate var _disposeBag: DisposeBag?
@@ -33,14 +33,26 @@ open class BaseViewController: UIViewController {
         _disposeBag = nil
     }
     
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        logger.verbose(self.theClassName)
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        logger.verbose(self.theClassName)
+    }
+    
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         if (self.navigationController == nil) {
-            print("View release: \(self)")
+            logger.verbose("View release")
             clearDisposeBag()
         } else {
-            print("View keep: \(self)")
+            logger.verbose("View keep")
         }
     }
 }

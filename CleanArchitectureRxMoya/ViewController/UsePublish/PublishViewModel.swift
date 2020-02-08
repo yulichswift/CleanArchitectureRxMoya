@@ -24,7 +24,7 @@ final class PublishViewModel: BaseViewModel {
         
         provider.rx.request(.allUsers(since: since))
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .observeOn(MainScheduler.instance)
+            //.observeOn(MainScheduler.instance)
             //.mapString()
             .map(GitHubUsers.self)
             .subscribe { rusult in
@@ -32,10 +32,10 @@ final class PublishViewModel: BaseViewModel {
                 
                 switch rusult {
                 case let .success(response):
-                    //print(response) // Print string
+                    //log.verbose(response) // mapString
                     self.usersPublish.onNext(response)
                 case let .error(error):
-                    print(error)
+                    logger.error(error)
                     self.usersPublish.onNext([])
                 }}.disposed(by: self.disposeBag)
     }
