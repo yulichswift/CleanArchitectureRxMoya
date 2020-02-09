@@ -15,7 +15,7 @@ final class MainViewModel: BaseViewModel {
         
     let apiManager = ApiManager.shared
     
-    var sinceId = 8
+    var since = 8
 }
 
 extension MainViewModel: ObserableTransform {
@@ -33,8 +33,7 @@ extension MainViewModel: ObserableTransform {
         let resultUsers = input.fetchUsers
             .throttle(10, latest: false, scheduler: SerialDispatchQueueScheduler(qos: .background))
             .flatMap {
-                return self.apiManager.request(GitHubApi.allUsers(since: self.sinceId))
-                    .map(GitHubUsers.self)
+                return self.apiManager.requestReturnDecodable(GitHubApi.GetUsers(since: self.since))
                     .do(onSuccess: { _ in
                         logger.verbose("Load onSuccess")
                         self.progressingPublish.onNext(false)

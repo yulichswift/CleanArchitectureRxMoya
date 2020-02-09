@@ -14,8 +14,6 @@ import RxCocoa
 /**
  https://github.com/Moya/Moya/blob/master/docs/Plugins.md
  
- https://qiita.com/kouheiszk/items/46e9a233d9bb227c3b1d
- 
  https://github.com/onevcat/Kingfisher
  */
 

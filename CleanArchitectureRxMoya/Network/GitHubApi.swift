@@ -10,15 +10,15 @@ import Foundation
 import Moya
 import RxSwift
 
-enum GitHubApi {
-    case allUsers(since: Int)
-}
+/**
+ https://qiita.com/kouheiszk/items/46e9a233d9bb227c3b1d
+ 
+ https://medium.com/@davidlin_98861/%E8%8F%AF%E9%BA%97%E7%9A%84-network-layer-c5c664dcca47
+ */
 
-extension GitHubApi: TargetType {
-    
-    var headers: [String : String]? {
-        return nil
-    }
+protocol GitHubApiTargetType: DecodableResponseTargetType { }
+
+extension GitHubApiTargetType {
     
     var baseURL: URL {
         #if DEBUG
@@ -28,44 +28,34 @@ extension GitHubApi: TargetType {
         #endif
     }
     
-    var path: String {
-        switch self {
-        case .allUsers:
-            return "/users"
-        }
-    }
-    
-    var method: Moya.Method {
-        switch self {
-        case .allUsers:
-            return .get
-        }
-    }
-    
-    var parameters: [String: Any]? {
-        switch self {
-        case .allUsers(let since):
-            return ["since" : since]
-        }
+    var headers: [String : String]? {
+        return nil
     }
     
     var sampleData: Data {
-        switch self {
-        default :
-            return "[{\"userId\": \"1\", \"Title\": \"Title String\", \"Body\": \"Body String\"}]".data(using: String.Encoding.utf8)!
-        }
+        let path = Bundle.main.path(forResource: "samples", ofType: "json")!
+        return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
     }
+}
+
+enum GitHubApi {
     
-    var task: Task {
-        // 無參數
-        //return .requestPlain
+    struct GetUsers: GitHubApiTargetType {
         
-        // Post Json格式
-        //return .requestParameters(parameters: parameters ?? [:], encoding: JSONEncoding.default)
+        let since: Int
         
-        switch self {
-        case .allUsers:
-            return .requestParameters(parameters: parameters ?? [:], encoding: URLEncoding.default)
+        init(since: Int) {
+            self.since = since
         }
+        
+        var method: Moya.Method { return .get }
+        
+        var path = "/users"
+        
+        var parameters: [String: Any]? {
+            return ["since" : since]
+        }
+        
+        typealias ResponseType = GitHubUsers
     }
 }

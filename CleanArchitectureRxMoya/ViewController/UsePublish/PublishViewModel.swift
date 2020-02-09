@@ -22,7 +22,7 @@ final class PublishViewModel: BaseViewModel {
     func fetchUsersSince(_ since: Int) {
         progressingPublish.onNext(true)
         
-        apiManager.request(GitHubApi.allUsers(since: since)) // moya預設在背景訂閱, 前景觀察
+        apiManager.request(GitHubApi.GetUsers(since: since)) // moya預設在背景訂閱, 前景觀察
             //.subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             //.observeOn(MainScheduler.instance)
             //.mapString()
