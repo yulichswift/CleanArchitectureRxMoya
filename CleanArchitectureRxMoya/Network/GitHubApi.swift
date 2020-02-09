@@ -1,5 +1,5 @@
 //
-//  GitHubApiManager.swift
+//  GitHubApi.swift
 //  CleanArchitectureRxMoya
 //
 //  Created by Jeff Yu on 2020/1/31.
@@ -10,11 +10,12 @@ import Foundation
 import Moya
 import RxSwift
 
-enum GitHubApiManager {
+enum GitHubApi {
     case allUsers(since: Int)
 }
 
-extension GitHubApiManager: TargetType {
+extension GitHubApi: TargetType {
+    
     var headers: [String : String]? {
         return nil
     }
@@ -50,7 +51,7 @@ extension GitHubApiManager: TargetType {
     
     var sampleData: Data {
         switch self {
-        case .allUsers:
+        default :
             return "[{\"userId\": \"1\", \"Title\": \"Title String\", \"Body\": \"Body String\"}]".data(using: String.Encoding.utf8)!
         }
     }

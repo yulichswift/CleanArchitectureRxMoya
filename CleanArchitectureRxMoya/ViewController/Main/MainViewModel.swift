@@ -13,8 +13,7 @@ import RxCocoa
 
 final class MainViewModel: BaseViewModel {
         
-    //let provider = MoyaProvider<GitHubApiManager>(plugins: [NetworkLoggerPlugin(verbose: true)])
-    let provider = MoyaProvider<GitHubApiManager>()
+    let apiManager = ApiManager.shared
     
     var sinceId = 8
 }
@@ -34,7 +33,7 @@ extension MainViewModel: ObserableTransform {
         let resultUsers = input.fetchUsers
             .throttle(10, latest: false, scheduler: SerialDispatchQueueScheduler(qos: .background))
             .flatMap {
-                return self.provider.rx.request(.allUsers(since: self.sinceId))
+                return self.apiManager.request(GitHubApi.allUsers(since: self.sinceId))
                     .map(GitHubUsers.self)
                     .do(onSuccess: { _ in
                         logger.verbose("Load onSuccess")

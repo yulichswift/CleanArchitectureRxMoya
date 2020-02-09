@@ -11,7 +11,7 @@
 		1F09F21C23ED02F3005DDFE9 /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09F21B23ED02F3005DDFE9 /* PublishViewController.swift */; };
 		1F09F21E23ED0505005DDFE9 /* PublishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09F21D23ED0505005DDFE9 /* PublishViewModel.swift */; };
 		1F43D43F23E999AA004CE885 /* GitHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D43E23E999AA004CE885 /* GitHubModel.swift */; };
-		1F43D44223E999BE004CE885 /* GitHubApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44123E999BE004CE885 /* GitHubApiManager.swift */; };
+		1F43D44223E999BE004CE885 /* GitHubApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44123E999BE004CE885 /* GitHubApi.swift */; };
 		1F43D44423E99A10004CE885 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44323E99A10004CE885 /* MainViewModel.swift */; };
 		1F43D44723E99C25004CE885 /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43D44623E99C25004CE885 /* SampleTableViewCell.swift */; };
 		1F8CEA9223EA778C00D5C566 /* Observable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CEA9123EA778C00D5C566 /* Observable+Ext.swift */; };
@@ -24,6 +24,7 @@
 		1FB14E8923EE7D300046D7B9 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1FB14E8823EE7D300046D7B9 /* MBProgressHUD */; };
 		1FB14E8B23EE83220046D7B9 /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14E8A23EE83220046D7B9 /* NSObject+Ext.swift */; };
 		1FB14E8E23EE85EF0046D7B9 /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14E8D23EE85EF0046D7B9 /* LogUtil.swift */; };
+		1FC4183023F0026800F7F2A3 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC4182F23F0026800F7F2A3 /* ApiManager.swift */; };
 		1FC5A71423E91530005C44A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71323E91530005C44A6 /* AppDelegate.swift */; };
 		1FC5A71623E91530005C44A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71523E91530005C44A6 /* SceneDelegate.swift */; };
 		1FC5A71823E91530005C44A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71723E91530005C44A6 /* MainViewController.swift */; };
@@ -42,12 +43,13 @@
 		1F09F21B23ED02F3005DDFE9 /* PublishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
 		1F09F21D23ED0505005DDFE9 /* PublishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewModel.swift; sourceTree = "<group>"; };
 		1F43D43E23E999AA004CE885 /* GitHubModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubModel.swift; sourceTree = "<group>"; };
-		1F43D44123E999BE004CE885 /* GitHubApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubApiManager.swift; sourceTree = "<group>"; };
+		1F43D44123E999BE004CE885 /* GitHubApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubApi.swift; sourceTree = "<group>"; };
 		1F43D44323E99A10004CE885 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		1F43D44623E99C25004CE885 /* SampleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleTableViewCell.swift; sourceTree = "<group>"; };
 		1F8CEA9123EA778C00D5C566 /* Observable+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Ext.swift"; sourceTree = "<group>"; };
 		1FB14E8A23EE83220046D7B9 /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
 		1FB14E8D23EE85EF0046D7B9 /* LogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
+		1FC4182F23F0026800F7F2A3 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		1FC5A71023E91530005C44A6 /* CleanArchitectureRxMoya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanArchitectureRxMoya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC5A71323E91530005C44A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FC5A71523E91530005C44A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +151,8 @@
 		1F43D44023E999BE004CE885 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1F43D44123E999BE004CE885 /* GitHubApiManager.swift */,
+				1FC4182F23F0026800F7F2A3 /* ApiManager.swift */,
+				1F43D44123E999BE004CE885 /* GitHubApi.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -337,8 +340,9 @@
 				1F09F21923ECF0D4005DDFE9 /* ObserableTransform.swift in Sources */,
 				1F43D43F23E999AA004CE885 /* GitHubModel.swift in Sources */,
 				1F8CEA9223EA778C00D5C566 /* Observable+Ext.swift in Sources */,
-				1F43D44223E999BE004CE885 /* GitHubApiManager.swift in Sources */,
+				1F43D44223E999BE004CE885 /* GitHubApi.swift in Sources */,
 				1FFC2FE623EC2C920069C68F /* DetailViewModel.swift in Sources */,
+				1FC4183023F0026800F7F2A3 /* ApiManager.swift in Sources */,
 				1FC5A71423E91530005C44A6 /* AppDelegate.swift in Sources */,
 				1FC5A71E23E91530005C44A6 /* CleanArchitectureRxMoya.xcdatamodeld in Sources */,
 				1FB14E8B23EE83220046D7B9 /* NSObject+Ext.swift in Sources */,

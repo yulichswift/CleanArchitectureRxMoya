@@ -15,14 +15,14 @@ final class PublishViewModel: BaseViewModel {
     
     let usersPublish: PublishSubject<GitHubUsers> = PublishSubject.init()
     
-    let provider = MoyaProvider<GitHubApiManager>()
+    let apiManager = ApiManager.shared
     
     var disposeBag = DisposeBag()
     
     func fetchUsersSince(_ since: Int) {
         progressingPublish.onNext(true)
         
-        provider.rx.request(.allUsers(since: since)) // moya預設在背景訂閱, 前景觀察
+        apiManager.request(GitHubApi.allUsers(since: since)) // moya預設在背景訂閱, 前景觀察
             //.subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             //.observeOn(MainScheduler.instance)
             //.mapString()
