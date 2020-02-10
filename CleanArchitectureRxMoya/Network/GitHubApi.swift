@@ -42,18 +42,18 @@ enum GitHubApi {
     
     struct GetUsers: GitHubApiTargetType {
         
-        let since: Int
+        let parameters: [String : Any]
         
         init(since: Int) {
-            self.since = since
+            parameters = ["since" : since]
         }
         
         var method: Moya.Method { return .get }
         
         var path = "/users"
         
-        var parameters: [String: Any]? {
-            return ["since" : since]
+        var task: Task {
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
         
         typealias ResponseType = GitHubUsers
