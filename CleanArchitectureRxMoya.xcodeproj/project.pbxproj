@@ -24,6 +24,7 @@
 		1FB14E8923EE7D300046D7B9 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1FB14E8823EE7D300046D7B9 /* MBProgressHUD */; };
 		1FB14E8B23EE83220046D7B9 /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14E8A23EE83220046D7B9 /* NSObject+Ext.swift */; };
 		1FB14E8E23EE85EF0046D7B9 /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14E8D23EE85EF0046D7B9 /* LogUtil.swift */; };
+		1FBCEF7323F0E58D00F9787A /* DictionaryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBCEF7223F0E58D00F9787A /* DictionaryUtil.swift */; };
 		1FC4183023F0026800F7F2A3 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC4182F23F0026800F7F2A3 /* ApiManager.swift */; };
 		1FC5A71423E91530005C44A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71323E91530005C44A6 /* AppDelegate.swift */; };
 		1FC5A71623E91530005C44A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5A71523E91530005C44A6 /* SceneDelegate.swift */; };
@@ -49,6 +50,7 @@
 		1F8CEA9123EA778C00D5C566 /* Observable+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Ext.swift"; sourceTree = "<group>"; };
 		1FB14E8A23EE83220046D7B9 /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
 		1FB14E8D23EE85EF0046D7B9 /* LogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
+		1FBCEF7223F0E58D00F9787A /* DictionaryUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryUtil.swift; sourceTree = "<group>"; };
 		1FC4182F23F0026800F7F2A3 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		1FC5A71023E91530005C44A6 /* CleanArchitectureRxMoya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanArchitectureRxMoya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC5A71323E91530005C44A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				1FB14E8A23EE83220046D7B9 /* NSObject+Ext.swift */,
 				1F8CEA9123EA778C00D5C566 /* Observable+Ext.swift */,
 				1F09F21823ECF0D4005DDFE9 /* ObserableTransform.swift */,
+				1FBCEF7223F0E58D00F9787A /* DictionaryUtil.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				1F43D44223E999BE004CE885 /* GitHubApi.swift in Sources */,
 				1FFC2FE623EC2C920069C68F /* DetailViewModel.swift in Sources */,
 				1FC4183023F0026800F7F2A3 /* ApiManager.swift in Sources */,
+				1FBCEF7323F0E58D00F9787A /* DictionaryUtil.swift in Sources */,
 				1FC5A71423E91530005C44A6 /* AppDelegate.swift in Sources */,
 				1FC5A71E23E91530005C44A6 /* CleanArchitectureRxMoya.xcdatamodeld in Sources */,
 				1FB14E8B23EE83220046D7B9 /* NSObject+Ext.swift in Sources */,
