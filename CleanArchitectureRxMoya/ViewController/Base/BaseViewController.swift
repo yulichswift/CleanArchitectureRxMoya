@@ -16,7 +16,7 @@ open class BaseViewController: UIViewController {
         // 測試物件釋放
         logger.verbose(self.theClassName)
     }
-
+    
     fileprivate var _disposeBag: DisposeBag?
     
     var disposeBag: DisposeBag {
@@ -49,10 +49,10 @@ open class BaseViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         if (self.navigationController == nil) {
-            logger.verbose("View release")
+            logger.verbose("View release: \(self.theClassName)")
             clearDisposeBag()
         } else {
-            logger.verbose("View keep")
+            logger.verbose("View keep: \(self.theClassName)")
         }
     }
 }
