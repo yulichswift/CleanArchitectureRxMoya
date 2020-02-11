@@ -52,10 +52,7 @@ class MainViewController: BaseViewController {
         
         let tap = rightBtn.rx.tap.mapToVoid()
         
-        // latest: 最後一筆是否送出
-        let mergeObservable = Observable.merge(viewWillAppear, pull, tap)
-        
-        let output = viewModel.transform(input: MainViewModel.Input(fetchUsers: mergeObservable))
+        let output = viewModel.transform(input: MainViewModel.Input(viewWillAppear: viewWillAppear, pullTableView: pull, tapRefreshBtn: tap))
         
         output.resultUsers
             .drive(tableView.rx.items(cellIdentifier: "FirstCell", cellType: SampleTableViewCell.self)) { (index, data, cell) in

@@ -21,7 +21,9 @@ final class MainViewModel: BaseViewModel {
 extension MainViewModel: ObserableTransform {
     
     struct Input {
-        let fetchUsers: Observable<Void>
+        let viewWillAppear: Observable<Void>
+        let pullTableView: Observable<Void>
+        let tapRefreshBtn: Observable<Void>
     }
     
     struct Output {
@@ -30,7 +32,10 @@ extension MainViewModel: ObserableTransform {
     
     func transform(input: Input) -> Output {
         
-        let resultUsers = input.fetchUsers
+        let mergeObservable = Observable.merge(input.viewWillAppear, input.pullTableView, input.tapRefreshBtn)        
+        
+         // latest: 最後一筆是否送出
+        let resultUsers = mergeObservable
             .throttle(10, latest: false, scheduler: SerialDispatchQueueScheduler(qos: .background))
             .flatMap {
                 return self.apiManager.requestReturnDecodable(GitHubApi.GetUsers(since: self.since))
