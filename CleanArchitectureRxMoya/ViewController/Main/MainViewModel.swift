@@ -52,9 +52,8 @@ extension MainViewModel: ObserableTransform {
                     .catchError { error in
                         logger.error(error)
                         return Single.just([])
-                }
-        }
-        .asDriver(onErrorJustReturn: []) // driver觀察時, 會轉換成main thread.
+                }}
+            .asDriver(onErrorJustReturn: []) // driver觀察時, 會轉換成main thread.
         
         return Output(resultUsers: resultUsers)
     }
